@@ -1,0 +1,21 @@
+makeCacheMatrix <- function (X, Row, Col) {
+    Start <- Sys.time()
+    This.is.matrix <<- matrix(data = X, nrow = Row, ncol = Col)
+    Cache.Inverse <<- solve(This.is.matrix)
+    print(Cache.Inverse)
+    Time.elapsed <- Sys.time() - Start
+    print(Time.elapsed)
+}
+
+cacheSolve <- function(x, row, col){
+  Start <- Sys.time()
+  if (exists("This.is.matrix")) {
+    if (identical(matrix(data = x, nrow = row, ncol = col), This.is.matrix)){
+      Time.elapsed <- Sys.time() - Start
+      print(Time.elapsed)
+      return(Cache.Inverse)
+    }
+    message("make new cache")
+    makeCacheMatrix(x, row, col) 
+  }
+}
